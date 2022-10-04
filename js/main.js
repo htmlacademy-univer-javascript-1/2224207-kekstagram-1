@@ -1,25 +1,6 @@
-function getRandomFromRange(from = 0, to = 1) {
-  return Math.floor(Math.random() * (to - from + 1)) + from;
-}
-function isStringLessThen(string = '', maxLenght = 140) {
-  return string.length <= maxLenght;
-}
-
-function arrayFromRange(start = 0, end = 1) {
-  const RESULT = [];
-  for(let i = start; i <= end; i++) {
-    RESULT.push(i);
-  }
-  return RESULT;
-}
-
-function getUniqueRandom(range) {
-  const INDEX = getRandomFromRange(0, range.length - 1);
-  const RESULT = range[INDEX];
-  range.splice(INDEX, 1);
-  return RESULT;
-}
-
+const AVAILABLE_PHOTOS_ID = arrayFromRange(1, 25);
+const AVAILABLE_PHOTOS_URL = arrayFromRange(1, 25);
+const AVAILABLE_COMMENTS_ID = arrayFromRange(1, 25);
 const MESSAGE_DATA = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -37,7 +18,26 @@ const NAME_DATA = [
   'Ревекка',
   'Хирам'
 ];
-const AVAILABLE_COMMENTS_ID = arrayFromRange(1, 25);
+
+function getRandomFromRange(from = 0, to = 1) {
+  return Math.floor(Math.random() * (to - from + 1)) + from;
+}
+function isStringLessThen(string = '', maxLenght = 140) {
+  return string.length <= maxLenght;
+}
+function arrayFromRange(start = 0, end = 1) {
+  const RESULT = [];
+  for(let i = start; i <= end; i++) {
+    RESULT.push(i);
+  }
+  return RESULT;
+}
+function getUniqueRandom(range) {
+  const INDEX = getRandomFromRange(0, range.length - 1);
+  const RESULT = range[INDEX];
+  range.splice(INDEX, 1);
+  return RESULT;
+}
 function createComments() {
   return {
     id: getUniqueRandom(AVAILABLE_COMMENTS_ID),
@@ -46,9 +46,6 @@ function createComments() {
     name: NAME_DATA[0, NAME_DATA.length - 1]
   };
 }
-
-const AVAILABLE_PHOTOS_ID = arrayFromRange(1, 25);
-const AVAILABLE_PHOTOS_URL = arrayFromRange(1, 25);
 function createPhotoDiscription() {
   return {
     id: getUniqueRandom(AVAILABLE_PHOTOS_ID),
@@ -58,7 +55,6 @@ function createPhotoDiscription() {
     comments: Array.from({length:5}, createComments)
   };
 }
-
 function getPhotosDiscriptions() {
   return Array.from({length:25}, createPhotoDiscription);
 }
