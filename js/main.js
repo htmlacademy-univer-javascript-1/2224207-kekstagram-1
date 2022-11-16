@@ -1,1 +1,1 @@
-import './photo_discription.js';
+import './miniature_drawing.js';
