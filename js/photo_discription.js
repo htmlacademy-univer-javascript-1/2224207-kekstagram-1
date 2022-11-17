@@ -25,8 +25,8 @@ function createComments() {
   return {
     id: getUniqueRandom(AVAILABLE_COMMENTS_ID),
     avatar: `img/avatar-${getRandomFromRange(1, 6)}.svg`,
-    message: MESSAGE_DATA[0, MESSAGE_DATA.length - 1],
-    name: NAME_DATA[0, NAME_DATA.length - 1]
+    message: MESSAGE_DATA[getRandomFromRange(0, MESSAGE_DATA.length - 1)],
+    name: NAME_DATA[getRandomFromRange(0, NAME_DATA.length - 1)]
   };
 }
 function createPhotoDiscription() {
