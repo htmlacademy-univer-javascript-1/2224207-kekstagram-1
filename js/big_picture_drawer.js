@@ -13,16 +13,15 @@ function createPictureComment(data) {
   return newComment;
 }
 
-function closeBigPicture() {
-  bigPicture.classList.add('hidden');
-  body.classList.remove('modal-open');
+function closeBigPicture(evt) {
+  const thisbigPicture = document.querySelector('.big-picture');
+  thisbigPicture.classList.add('hidden');
+  thisbigPicture.querySelector('.big-picture__cancel').removeEventListener('click', this);
+  evt.preventDefault();
 }
 
 function renderBigPicture(data) {
-  bigPicture.querySelector('.big-picture__cancel').addEventListener('click', (evt) => {
-    closeBigPicture();
-    evt.preventDefault();
-  });
+  bigPicture.querySelector('.big-picture__cancel').addEventListener('click', closeBigPicture);
 
   body.classList.add('modal-open');
 
@@ -43,9 +42,8 @@ function renderBigPicture(data) {
 
 body.addEventListener('keydown', (evt) => {
   if (evt.keyCode === 27) {
-    closeBigPicture();
+    closeBigPicture(evt);
   }
-  evt.preventDefault();
 });
 
 export {renderBigPicture};

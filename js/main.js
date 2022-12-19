@@ -1,1 +1,2 @@
-import './miniature_drawing.js';
+import './miniature_drawer.js';
+import './upload_form_drawer.js';

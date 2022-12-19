@@ -1,5 +1,5 @@
 import {getPhotosDiscriptions} from './photo_discription.js';
-import {renderBigPicture} from './big_picture_drawing.js';
+import {renderBigPicture} from './big_picture_drawer.js';
 
 const TEST_DATA = getPhotosDiscriptions();
 
