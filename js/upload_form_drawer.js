@@ -1,4 +1,6 @@
 import { setValidator } from './upload_form_validator.js';
+import { initializeScaling } from './preview_scale.js';
+import { initializeEffects } from './preview_effects.js';
 
 const ESC_KEY = 27;
 
@@ -10,6 +12,8 @@ const textDescription = uploadForm.querySelector('.text__description');
 const textHashTag = uploadForm.querySelector('.text__hashtags');
 
 setValidator(uploadForm);
+initializeScaling(imgUploadOverlay);
+initializeEffects(imgUploadOverlay);
 
 function closeOverlay(evt) {
   const thisImgUploadForm = document.querySelector('.img-upload__form');

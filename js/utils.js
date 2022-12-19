@@ -18,9 +18,14 @@ function getUniqueRandom(range) {
   return RESULT;
 }
 
+function parsePercents(percents) {
+  return Number(percents.slice(0, -1));
+}
+
 export {
   getRandomFromRange,
   isStringLessThen,
   arrayFromRange,
-  getUniqueRandom
+  getUniqueRandom,
+  parsePercents
 };
