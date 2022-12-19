@@ -1,4 +1,4 @@
-import {getUniqueRandom, getRandomFromRange, arrayFromRange} from './supporting_functions.js';
+import {getUniqueRandom, getRandomFromRange, arrayFromRange} from './utils.js';
 
 const AVAILABLE_PHOTOS_ID = arrayFromRange(1, 25);
 const AVAILABLE_PHOTOS_URL = arrayFromRange(1, 25);
