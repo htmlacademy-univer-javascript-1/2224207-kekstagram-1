@@ -1,5 +1,7 @@
 import { setValidator } from './upload_form_validator.js';
 
+const ESC_KEY = 27;
+
 const body = document.querySelector('body');
 const uploadForm = body.querySelector('.img-upload__form');
 const uploadImgInput = uploadForm.querySelector('.img-upload__input');
@@ -16,6 +18,7 @@ function closeOverlay(evt) {
   thisImgUploadOverlay.classList.add('hidden');
   thisImgUploadOverlay.querySelector('.img-upload__cancel').removeEventListener('click', this);
   thisImgUploadForm.reset();
+  document.querySelector('body').classList.remove('modal-open');
   evt.preventDefault();
 }
 
@@ -26,10 +29,9 @@ uploadImgInput.addEventListener('change', () => {
 
 imgUploadOverlay.querySelector('.img-upload__cancel').addEventListener('click', closeOverlay);
 body.addEventListener('keydown', (evt) => {
-  if (evt.keyCode === 27 &&
+  if (evt.keyCode === ESC_KEY &&
     document.activeElement !== textDescription &&
     document.activeElement !== textHashTag) {
     closeOverlay(evt);
-    document.querySelector('body').classList.remove('modal-open');
   }
 });
