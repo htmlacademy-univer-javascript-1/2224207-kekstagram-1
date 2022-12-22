@@ -10,6 +10,7 @@ const body = document.querySelector('body');
 const uploadForm = body.querySelector('.img-upload__form');
 const uploadImgInput = uploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = uploadForm.querySelector('.img-upload__overlay');
+const imgUploadCancel = imgUploadOverlay.querySelector('.img-upload__cancel');
 const textDescription = uploadForm.querySelector('.text__description');
 const textHashTag = uploadForm.querySelector('.text__hashtags');
 const submiteBtn = uploadForm.querySelector('.img-upload__submit');
@@ -18,7 +19,7 @@ const pristine = setValidator(uploadForm);
 
 function closeOverlay() {
   imgUploadOverlay.classList.add('hidden');
-  imgUploadOverlay.querySelector('.img-upload__cancel').removeEventListener('click', cancelUpload);
+  imgUploadCancel.removeEventListener('click', cancelUpload);
   body.removeEventListener('keydown', cancelUpload);
   body.classList.remove('modal-open');
   submiteBtn.removeEventListener('click', onSubmite);
@@ -60,7 +61,7 @@ uploadImgInput.addEventListener('change', () => {
   initializeEffects();
   initializeScaling();
 
-  imgUploadOverlay.querySelector('.img-upload__cancel').addEventListener('click', cancelUpload);
+  imgUploadCancel.addEventListener('click', cancelUpload);
   body.addEventListener('keydown', cancelUpload);
   submiteBtn.addEventListener('click', onSubmite);
 });

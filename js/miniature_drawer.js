@@ -4,6 +4,7 @@ import { showLoadError } from './message.js';
 import { debounce, getRandomSample } from './utils.js';
 
 const RANDOM_LENGTH = 10;
+const TIME_DELAY = 500;
 
 const pictureContainert = document.querySelector('.pictures');
 const miniatureTamplate = document.querySelector('#picture').content;
@@ -60,7 +61,7 @@ function renderMiniature(data) {
           }));
           break;
       }
-    }, 500));
+    }, TIME_DELAY));
   });
   makeMiniatures(data);
 }

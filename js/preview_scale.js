@@ -13,14 +13,14 @@ const imgPreview = imgUploadOverlay.querySelector('.img-upload__preview img');
 function onSmaller() {
   let value = parsePercents(scaleValue.value);
   value = value - (value > SCALE_MIN ? SCALE_STEP: 0);
-  imgPreview.style.transform = `scale(${value / 100})`;
+  imgPreview.style.transform = `scale(${value / SCALE_MAX})`;
   scaleValue.value = `${value}%`;
 }
 
 function onBigger() {
   let value = parsePercents(scaleValue.value);
   value = value + (value < SCALE_MAX ? SCALE_STEP: 0);
-  imgPreview.style.transform = `scale(${value / 100})`;
+  imgPreview.style.transform = `scale(${value / SCALE_MAX})`;
   scaleValue.value = `${value}%`;
 }
 

@@ -2,11 +2,12 @@ const COMMENTS_STEP = 5;
 const ESC_KEY = 27;
 
 const body = document.querySelector('body');
+const commentTemplate = document.querySelector('#big__picture__comment').content;
 const bigPicture = body.querySelector('.big-picture');
 const commentLoader = bigPicture.querySelector('.comments-loader');
 const commentsSection = bigPicture.querySelector('.social__comments');
 const displayedCommentsCount = bigPicture.querySelector('.displayed-comments-count');
-const commentTemplate = document.querySelector('#big__picture__comment').content;
+const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 
 let displayedComments = 0;
 let comments = [];
@@ -25,7 +26,7 @@ function createPictureComment(data) {
 function closeBigPicture(evt) {
   if (evt.type === 'click' || (evt.keyCode === ESC_KEY)) {
     bigPicture.classList.add('hidden');
-    bigPicture.querySelector('.big-picture__cancel').removeEventListener('click', closeBigPicture);
+    bigPictureCancel.removeEventListener('click', closeBigPicture);
     body.removeEventListener('keydown', closeBigPicture);
     commentLoader.removeEventListener('click', appendNextComments);
     body.classList.remove('modal-open');
@@ -42,7 +43,7 @@ function appendNextComments() {
 }
 
 function renderBigPicture(data) {
-  bigPicture.querySelector('.big-picture__cancel').addEventListener('click', closeBigPicture);
+  bigPictureCancel.addEventListener('click', closeBigPicture);
   body.addEventListener('keydown', closeBigPicture);
   commentLoader.addEventListener('click', appendNextComments);
 
