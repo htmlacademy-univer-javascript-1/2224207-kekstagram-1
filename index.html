@@ -31,7 +31,7 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" action="https://26.javascript.pages.academy/kekstagram" method="post" enctype="multipart/form-data" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image" action="https://26.javascript.pages.academy/kekstagram" method="POST" enctype="multipart/form-data" autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
@@ -239,6 +239,13 @@
       <img class="social__picture" src="" alt="" width="35" height="35">
       <p class="social__text"></p>
     </li>
+  </template>
+
+  <!-- Мой шаблон для ошибкт загрузки -->
+  <template id="load_error">
+    <div class="load_error">
+      <h2>Ошибка при загрузки изображений</h2>
+    </div>
   </template>
 
   <script src="./pristine/pristine.min.js" type="text/javascript"></script>
