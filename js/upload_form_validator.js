@@ -19,6 +19,7 @@ function setValidator(uploadForm) {
     },
     'Хештег некорректен'
   );
+  return pristine;
 }
 
 export {setValidator};

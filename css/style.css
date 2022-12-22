@@ -1208,7 +1208,7 @@ main {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 4;
 
   background-color: rgba(0, 0, 0, 0.8);
 }
@@ -1407,4 +1407,18 @@ main {
 
 .hidden {
   display: none;
+}
+
+/* Мои стили
+   ========================================================================== */
+
+.load_error {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.548);
 }

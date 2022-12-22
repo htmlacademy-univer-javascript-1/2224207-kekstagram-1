@@ -23,10 +23,14 @@ function createPictureComment(data) {
 }
 
 function closeBigPicture(evt) {
-  const thisbigPicture = document.querySelector('.big-picture');
-  thisbigPicture.classList.add('hidden');
-  thisbigPicture.querySelector('.big-picture__cancel').removeEventListener('click', this);
-  evt.preventDefault();
+  if (evt.type === 'click' || (evt.keyCode === ESC_KEY)) {
+    bigPicture.classList.add('hidden');
+    bigPicture.querySelector('.big-picture__cancel').removeEventListener('click', closeBigPicture);
+    body.removeEventListener('keydown', closeBigPicture);
+    commentLoader.removeEventListener('click', appendNextComments);
+    body.classList.remove('modal-open');
+    evt.preventDefault();
+  }
 }
 
 function appendNextComments() {
@@ -39,6 +43,8 @@ function appendNextComments() {
 
 function renderBigPicture(data) {
   bigPicture.querySelector('.big-picture__cancel').addEventListener('click', closeBigPicture);
+  body.addEventListener('keydown', closeBigPicture);
+  commentLoader.addEventListener('click', appendNextComments);
 
   body.classList.add('modal-open');
 
@@ -53,14 +59,5 @@ function renderBigPicture(data) {
   comments = data.comments;
   appendNextComments();
 }
-
-body.addEventListener('keydown', (evt) => {
-  if (evt.keyCode === ESC_KEY) {
-    closeBigPicture(evt);
-  }
-});
-commentLoader.addEventListener('click', () => {
-  appendNextComments();
-});
 
 export {renderBigPicture};

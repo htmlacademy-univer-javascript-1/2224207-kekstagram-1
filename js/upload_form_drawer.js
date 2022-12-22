@@ -1,6 +1,8 @@
 import { setValidator } from './upload_form_validator.js';
-import { initializeScaling } from './preview_scale.js';
-import { initializeEffects } from './preview_effects.js';
+import { initializeScaling, deleteScaling } from './preview_scale.js';
+import { initializeEffects, deleteEffects } from './preview_effects.js';
+import { setPublication } from './server_api.js';
+import { showSuccess, showError } from './message.js';
 
 const ESC_KEY = 27;
 
@@ -10,32 +12,53 @@ const uploadImgInput = uploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = uploadForm.querySelector('.img-upload__overlay');
 const textDescription = uploadForm.querySelector('.text__description');
 const textHashTag = uploadForm.querySelector('.text__hashtags');
+const submiteBtn = uploadForm.querySelector('.img-upload__submit');
+const pristine = setValidator(uploadForm);
 
-setValidator(uploadForm);
-initializeScaling(imgUploadOverlay);
-initializeEffects(imgUploadOverlay);
+function closeOverlay() {
+  imgUploadOverlay.classList.add('hidden');
+  imgUploadOverlay.querySelector('.img-upload__cancel').removeEventListener('click', cancelUpload);
+  body.removeEventListener('keydown', cancelUpload);
+  body.classList.remove('modal-open');
+  submiteBtn.removeEventListener('click', onSubmite);
+  deleteEffects();
+  deleteScaling();
+  uploadForm.reset();
+}
 
-function closeOverlay(evt) {
-  const thisImgUploadForm = document.querySelector('.img-upload__form');
-  const thisImgUploadOverlay = thisImgUploadForm.querySelector('.img-upload__overlay');
+function cancelUpload(evt) {
+  if (evt.type === 'click' ||
+    (evt.keyCode === ESC_KEY &&
+    document.activeElement !== textDescription &&
+    document.activeElement !== textHashTag)) {
+    closeOverlay();
+  }
+}
 
-  thisImgUploadOverlay.classList.add('hidden');
-  thisImgUploadOverlay.querySelector('.img-upload__cancel').removeEventListener('click', this);
-  thisImgUploadForm.reset();
-  document.querySelector('body').classList.remove('modal-open');
+function onSubmite(evt) {
   evt.preventDefault();
+
+  if (pristine.validate()) {
+    setPublication(
+      () => {
+        showSuccess();
+        closeOverlay();
+      },
+      () => {
+        showError();
+      },
+      new FormData(uploadForm)
+    );
+  }
 }
 
 uploadImgInput.addEventListener('change', () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
-});
+  initializeEffects();
+  initializeScaling();
 
-imgUploadOverlay.querySelector('.img-upload__cancel').addEventListener('click', closeOverlay);
-body.addEventListener('keydown', (evt) => {
-  if (evt.keyCode === ESC_KEY &&
-    document.activeElement !== textDescription &&
-    document.activeElement !== textHashTag) {
-    closeOverlay(evt);
-  }
+  imgUploadOverlay.querySelector('.img-upload__cancel').addEventListener('click', cancelUpload);
+  body.addEventListener('keydown', cancelUpload);
+  submiteBtn.addEventListener('click', onSubmite);
 });

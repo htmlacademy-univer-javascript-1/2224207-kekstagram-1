@@ -1,7 +1,6 @@
-import {getPhotosDiscriptions} from './photo_discription.js';
-import {renderBigPicture} from './big_picture_drawer.js';
-
-const TEST_DATA = getPhotosDiscriptions();
+import { renderBigPicture } from './big_picture_drawer.js';
+import { getPhotos } from './server_api.js';
+import { showLoadError } from './message.js';
 
 function renderMiniature(data) {
   const pictureContainert = document.querySelector('.pictures');
@@ -22,4 +21,4 @@ function renderMiniature(data) {
   }
 }
 
-renderMiniature(TEST_DATA);
+getPhotos(renderMiniature, showLoadError);
