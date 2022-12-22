@@ -5,21 +5,49 @@ function isStringLessThen(string = '', maxLenght = 140) {
   return string.length <= maxLenght;
 }
 function arrayFromRange(start = 0, end = 1) {
-  const RESULT = [];
+  const result = [];
   for(let i = start; i <= end; i++) {
-    RESULT.push(i);
+    result.push(i);
   }
-  return RESULT;
+  return result;
 }
 function getUniqueRandom(range) {
-  const INDEX = getRandomFromRange(0, range.length - 1);
-  const RESULT = range[INDEX];
-  range.splice(INDEX, 1);
-  return RESULT;
+  const index = getRandomFromRange(0, range.length - 1);
+  const result = range[index];
+  range.splice(index, 1);
+  return result;
 }
 
 function parsePercents(percents) {
   return Number(percents.slice(0, -1));
+}
+
+function getRandomSample(data, length) {
+  const indexes = arrayFromRange(0, data.length - 1);
+  const resultIndexes = [];
+  for (let i = 0; i < length; i++) {
+    resultIndexes.push(getUniqueRandom(indexes));
+  }
+  return resultIndexes.map((el) => data[el]);
+}
+
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+function throttle (callback, delayBetweenFrames) {
+  let lastTime = 0;
+  return (...rest) => {
+    const now = new Date();
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
+  };
 }
 
 export {
@@ -27,5 +55,8 @@ export {
   isStringLessThen,
   arrayFromRange,
   getUniqueRandom,
-  parsePercents
+  parsePercents,
+  getRandomSample,
+  debounce,
+  throttle
 };
