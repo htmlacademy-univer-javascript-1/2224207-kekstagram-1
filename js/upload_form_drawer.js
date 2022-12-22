@@ -13,6 +13,7 @@ const imgUploadOverlay = uploadForm.querySelector('.img-upload__overlay');
 const textDescription = uploadForm.querySelector('.text__description');
 const textHashTag = uploadForm.querySelector('.text__hashtags');
 const submiteBtn = uploadForm.querySelector('.img-upload__submit');
+const imgPreview = uploadForm.querySelector('.img-upload__preview img');
 const pristine = setValidator(uploadForm);
 
 function closeOverlay() {
@@ -55,6 +56,7 @@ function onSubmite(evt) {
 uploadImgInput.addEventListener('change', () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
+  imgPreview.src = URL.createObjectURL(uploadImgInput.files[0]);
   initializeEffects();
   initializeScaling();
 
