@@ -26,16 +26,12 @@ function closeError(evt) {
 
 function showMessage(id) {
   const messageTamplate = document.querySelector(id).content;
-
   const message = messageTamplate.cloneNode(true);
-
   body.appendChild(message);
 }
 
 function showLoadError() {
-  const loadErrorTemplate = document.querySelector('#load_error').content;
-  const loadError = loadErrorTemplate.cloneNode(true);
-  document.querySelector('body').appendChild(loadError);
+  showMessage('#load_error');
 }
 
 function showSuccess() {
