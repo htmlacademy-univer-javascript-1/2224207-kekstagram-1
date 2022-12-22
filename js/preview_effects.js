@@ -109,6 +109,11 @@ function initializeEffects() {
 }
 
 function deleteEffects() {
+  if (slider.noUiSlider) {
+    slider.noUiSlider.destroy();
+    imgPreview.style.filter = null;
+  }
+  effectsRadio[0].checked = true;
   effectsRadio.forEach((element) => {
     element.removeEventListener('change', updateEffects);
   });
